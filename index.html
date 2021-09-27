@@ -2,19 +2,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<style>#prepaDivTimer {
-		background-color: lightgrey;
-	}
-	
-	#codeDivTimer {
-		background-color: lightgrey;
-	
-	}
-	#totalDivTimer {
-		background-color: lightgrey;
-	
-	}
-	</style>
+	<link href="style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -24,6 +12,7 @@
 		<!-- <p>42 Rush 00</p> -->
 	</main>
 	<div class="corps">
+		<div class="param">
 			<label for="prepaTime">Temps pour se preparer :</label>
 			<input id="prepaTime" name="prepa" value="5" type="number">
 			<label for="prepaTime">secondes</label><br><br>
@@ -32,40 +21,41 @@
 			<label for="codeTime">secondes</label>
 			<br><br>
 			<div>
-				<button id="startStopBtn" class="button">Start/Stop</button>
-				<button id="breakBtn" class="button">break</button>
+				<button id="startStopBtn" class="button">Start / Stop</button>
+				<button id="breakBtn" class="button">Pause</button>
 			</div>
-			<p id="prepaDivTimer">
+		</div>
+			<p id="prepaDivTimer" class="truc">
 				<span>
 					Temps restant pour se preparer :
 				</span>
 
-				<span id="leftPreparationTime">
+				<strong><span id="leftPreparationTime">
 					5.0
-				</span>
+				</span></strong>
 			</p>
-
+		
 		<!-- <p id="leftCodeTime">Temps restant pour code :</p> -->
-		<p id="codeDivTimer">
+		<p id="codeDivTimer" class="truc">
 			<span>
 				Temps restant pour coder :
 			</span>
 
-			<span id="leftCodeTime">
+			<strong><span id="leftCodeTime">
 				30.0
-			</span>
+			</span></strong>
 
 			
 		</p>
 
-		<p id="totalDivTimer">
+		<p id="totalDivTimer" class="truc">
 			<span>
 				Temps total :
 			</span>
 
-			<span id="totalCodeTime">
+			<strong><span id="totalCodeTime">
 				0.0
-			</span>
+			</span></strong>
 
 			
 		</p>
@@ -96,8 +86,8 @@
 			{
 				clearInterval(timerInterval)
 				timerStarted = false;
-				prepaDivTimer.style.backgroundColor = "lightgrey";
-				codeDivTimer.style.backgroundColor = "lightgrey";
+				prepaDivTimer.style.backgroundColor = "#ffcb77";
+				codeDivTimer.style.backgroundColor = "#ffcb77";
 
 			}
 			else
@@ -120,10 +110,10 @@
 						leftPreparationTime.innerHTML = parseFloat(prepaTime - (currentTimer % (prepaTime + codeTime))).toFixed(1);
 						leftCodeTime.innerHTML = "0.0"
 						if (prepaTime - (currentTimer % (prepaTime + codeTime)) < 5)
-						prepaDivTimer.style.backgroundColor = "red";
+						prepaDivTimer.style.backgroundColor = "#fe6d73";
 						else
-						prepaDivTimer.style.backgroundColor = "lime";
-						codeDivTimer.style.backgroundColor = "lightgrey";
+						prepaDivTimer.style.backgroundColor = "#17c3b2";
+						codeDivTimer.style.backgroundColor = "#ffcb77";
 					}
 					else
 					{
@@ -131,10 +121,10 @@
 						leftCodeTime.innerHTML = parseFloat((codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime))).toFixed(1);
 						leftPreparationTime.innerHTML = "0.0"
 						if (codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime) < 5)
-						codeDivTimer.style.backgroundColor = "red";
+						codeDivTimer.style.backgroundColor = "#fe6d73";
 						else
-						codeDivTimer.style.backgroundColor = "lime";
-						prepaDivTimer.style.backgroundColor = "lightgrey";
+						codeDivTimer.style.backgroundColor = "#17c3b2";
+						prepaDivTimer.style.backgroundColor = "#ffcb77";
 					}
 					if (timerPause == false)
 					{

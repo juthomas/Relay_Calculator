@@ -1,0 +1,44 @@
+.corps 
+{
+	width: 80%;
+	margin: auto;
+}
+
+.truc 
+{
+	padding: 10px;
+	margin: 40px 0px;
+	background-color: #ffcb77;
+	border-radius: 7px;
+	box-shadow: 2px 2px 5px #FE6D73;
+}
+
+button 
+{
+	padding: 5px 20px;
+	box-shadow: 1px 1px 5px #000;
+	border-radius: 7px;
+	background-color: #FE6D73;
+}
+
+.param
+{
+	padding: 40px;
+	border-radius: 7px;
+	box-shadow: 2px 2px 5px #FE6D73;
+	background-color: #fe6d725d;
+}
+
+h3 
+{
+	font-size: 2em;
+	color: #FE6D73;
+	padding: 40px;
+}
+
+body 
+{
+	text-align: center;
+	background-color: #fef9ef;
+	font-family: 'Courier New', Courier, monospace;
+}
