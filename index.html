@@ -1,0 +1,143 @@
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+	<div class="all">
+	<main class="head">
+		<h3>MEGA ULTIMATE TIMER CALCULATOR ADVENTURE</h3>
+		<!-- <p>42 Rush 00</p> -->
+	</main>
+	<div class="corps">
+			<label for="prepaTime">Temps pour se preparer :</label>
+			<input id="prepaTime" name="prepa" value="5" type="number">
+			<label for="prepaTime">secondes</label><br><br>
+			<label for="codeTime">Temps pour coder :</label>
+			<input id="codeTime" name="code" value="30" type="number">
+			<label for="codeTime">secondes</label>
+			<br><br>
+			<div>
+				<button id="startStopBtn" class="button">Start/Stop</button>
+				<button id="breakBtn" class="button">break</button>
+			</div>
+			<p id="prepaDivTimer">
+				<span>
+					Temps restant pour se preparer :
+				</span>
+
+				<span id="leftPreparationTime">
+					5.0
+				</span>
+			</p>
+
+		<!-- <p id="leftCodeTime">Temps restant pour code :</p> -->
+		<p id="codeDivTimer">
+			<span>
+				Temps restant pour coder :
+			</span>
+
+			<span id="leftCodeTime">
+				30.0
+			</span>
+		</p>
+
+	</div>
+</div>
+	<script>
+		document.addEventListener("DOMContentLoaded", function (event) {
+		var startStopBtn = document.getElementById("startStopBtn");
+		var breakBtn = document.getElementById("breakBtn");
+		var timerStarted = false;
+		var timerPause = false;
+		var start = 0;
+		var timerInterval = 0;
+		var prepaTime = document.getElementById("prepaTime").value;
+		var codeTime = document.getElementById("codeTime").value;
+		var prepaDivTimer = document.getElementById("prepaDivTimer");
+		var codeDivTimer = document.getElementById("codeDivTimer");
+
+
+
+		var currentTimer = 0;
+		breakBtn.addEventListener('click', () => {timerPause = !timerPause});
+		startStopBtn.addEventListener('click', () => {
+			if (timerStarted == true)
+			{
+				clearInterval(timerInterval)
+				timerStarted = false;
+				prepaDivTimer.style.backgroundColor = "lightgrey";
+				codeDivTimer.style.backgroundColor = "lightgrey";
+
+			}
+			else
+			{
+				timerPause = false;
+				timerStarted = true;
+				// start = Date.now();
+				currentTimer = 0;
+				prepaTime = parseInt(document.getElementById("prepaTime").value,10);
+				codeTime = parseInt(document.getElementById("codeTime").value, 10);
+				timerInterval = setInterval(function(){
+					// console.log(((Date.now() - start)/1000) );
+					// currentTimer = ((Date.now() - start) /1000) 
+					console.log("prepatime: ",prepaTime);
+					console.log("codetime: ",codeTime);
+					console.log("modulo value :", (currentTimer % (prepaTime + codeTime)));
+					if (currentTimer % (prepaTime + codeTime) < prepaTime)
+					{
+					let leftPreparationTime = document.getElementById("leftPreparationTime");
+						leftPreparationTime.innerHTML = parseFloat(prepaTime - (currentTimer % (prepaTime + codeTime))).toFixed(1);
+						leftCodeTime.innerHTML = "0.0"
+						if (prepaTime - (currentTimer % (prepaTime + codeTime)) < 5)
+						prepaDivTimer.style.backgroundColor = "red";
+						else
+						prepaDivTimer.style.backgroundColor = "lime";
+						codeDivTimer.style.backgroundColor = "lightgrey";
+					}
+					else
+					{
+						let leftCodeTime = document.getElementById("leftCodeTime");
+						leftCodeTime.innerHTML = parseFloat((codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime))).toFixed(1);
+						leftPreparationTime.innerHTML = "0.0"
+						if (codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime) < 5)
+						codeDivTimer.style.backgroundColor = "red";
+						else
+						codeDivTimer.style.backgroundColor = "lime";
+						prepaDivTimer.style.backgroundColor = "lightgrey";
+					}
+					if (timerPause == false)
+					{
+						currentTimer+=0.1;
+					}
+
+				},100);
+			}
+		});
+
+		// form.addEventListener("submit", function (event) {
+		// 	event.preventDefault();
+		// 	let login = document.getElementById("enterLogin").value;
+		// 	let letterNumber = login.charCodeAt(0);
+		// 	if (letterNumber >= 'a'.charCodeAt(0) && letterNumber <= 'z'.charCodeAt(0)) {
+		// 		letterNumber -= 'a'.charCodeAt(0)
+		// 	}
+		// 	else if (letterNumber >= 'A'.charCodeAt(0) && letterNumber <= 'Z'.charCodeAt(0)) {
+		// 		letterNumber -= 'A'.charCodeAt(0)
+		// 	}
+		// 	else {
+		// 		letterNumber = 0;
+		// 	}
+		// 	let answer = document.getElementById("answer");
+		// 	answer.innerHTML = "Rush à faire : Rush 0" + (letterNumber + 1) % 5;
+		// });
+
+	});
+	</script>
+  <!-- <script  src="./script.js"></script> -->
+
+</body>
+
+</html>
