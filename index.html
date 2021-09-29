@@ -71,6 +71,7 @@
 		var timerPause = false;
 		var start = 0;
 		var timerInterval = 0;
+		var soundStarted = false;
 		var prepaTime = document.getElementById("prepaTime").value;
 		var codeTime = document.getElementById("codeTime").value;
 		var prepaDivTimer = document.getElementById("prepaDivTimer");
@@ -94,13 +95,11 @@
 			{
 				timerPause = false;
 				timerStarted = true;
-				// start = Date.now();
 				currentTimer = 0;
 				prepaTime = parseInt(document.getElementById("prepaTime").value,10);
 				codeTime = parseInt(document.getElementById("codeTime").value, 10);
 				timerInterval = setInterval(function(){
-					// console.log(((Date.now() - start)/1000) );
-					// currentTimer = ((Date.now() - start) /1000) 
+
 					console.log("prepatime: ",prepaTime);
 					console.log("codetime: ",codeTime);
 					console.log("modulo value :", (currentTimer % (prepaTime + codeTime)));
@@ -112,7 +111,10 @@
 						if (prepaTime - (currentTimer % (prepaTime + codeTime)) < 5)
 						prepaDivTimer.style.backgroundColor = "#fe6d73";
 						else
-						prepaDivTimer.style.backgroundColor = "#17c3b2";
+						{
+							soundStarted = false;
+							prepaDivTimer.style.backgroundColor = "#17c3b2";
+						}
 						codeDivTimer.style.backgroundColor = "#ffcb77";
 					}
 					else
@@ -121,9 +123,20 @@
 						leftCodeTime.innerHTML = parseFloat((codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime))).toFixed(1);
 						leftPreparationTime.innerHTML = "0.0"
 						if (codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime) < 5)
-						codeDivTimer.style.backgroundColor = "#fe6d73";
+						{
+							if (soundStarted == false)
+							{
+								var audio = new Audio('audio_file.mp3');
+								audio.play();
+							}
+							codeDivTimer.style.backgroundColor = "#fe6d73";
+							soundStarted = true;
+						}
 						else
-						codeDivTimer.style.backgroundColor = "#17c3b2";
+						{
+							soundStarted = false;
+							codeDivTimer.style.backgroundColor = "#17c3b2";
+						}
 						prepaDivTimer.style.backgroundColor = "#ffcb77";
 					}
 					if (timerPause == false)
@@ -135,26 +148,9 @@
 			}
 		});
 
-		// form.addEventListener("submit", function (event) {
-		// 	event.preventDefault();
-		// 	let login = document.getElementById("enterLogin").value;
-		// 	let letterNumber = login.charCodeAt(0);
-		// 	if (letterNumber >= 'a'.charCodeAt(0) && letterNumber <= 'z'.charCodeAt(0)) {
-		// 		letterNumber -= 'a'.charCodeAt(0)
-		// 	}
-		// 	else if (letterNumber >= 'A'.charCodeAt(0) && letterNumber <= 'Z'.charCodeAt(0)) {
-		// 		letterNumber -= 'A'.charCodeAt(0)
-		// 	}
-		// 	else {
-		// 		letterNumber = 0;
-		// 	}
-		// 	let answer = document.getElementById("answer");
-		// 	answer.innerHTML = "Rush à faire : Rush 0" + (letterNumber + 1) % 5;
-		// });
 
 	});
 	</script>
-  <!-- <script  src="./script.js"></script> -->
 
 </body>
 
