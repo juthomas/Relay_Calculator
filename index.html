@@ -30,7 +30,7 @@
 				</span>
 
 				<strong><span id="leftPreparationTime">
-						5.0
+						5.0s
 					</span></strong>
 			</p>
 			<p id="codeDivTimer" class="truc">
@@ -38,7 +38,7 @@
 					Temps restant pour coder :
 				</span>
 				<strong><span id="leftCodeTime">
-						30.0
+						30.0s
 					</span></strong>
 			</p>
 
@@ -47,7 +47,7 @@
 					Temps total :
 				</span>
 				<strong><span id="totalCodeTime">
-						0.0
+						0.0s
 					</span></strong>
 			</p>
 		</div>
@@ -87,8 +87,8 @@
 						console.log("modulo value :", (currentTimer % (prepaTime + codeTime)));
 						if (currentTimer % (prepaTime + codeTime) < prepaTime) {
 							let leftPreparationTime = document.getElementById("leftPreparationTime");
-							leftPreparationTime.innerHTML = parseFloat(prepaTime - (currentTimer % (prepaTime + codeTime))).toFixed(1);
-							leftCodeTime.innerHTML = "0.0"
+							leftPreparationTime.innerHTML = parseFloat(prepaTime - (currentTimer % (prepaTime + codeTime))).toFixed(1) + "s";
+							leftCodeTime.innerHTML = "0.0s"
 							if (prepaTime - (currentTimer % (prepaTime + codeTime)) < 5) {
 								prepaDivTimer.style.backgroundColor = "#fe6d73";
 							}
@@ -103,8 +103,8 @@
 						}
 						else {
 							let leftCodeTime = document.getElementById("leftCodeTime");
-							leftCodeTime.innerHTML = parseFloat((codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime))).toFixed(1);
-							leftPreparationTime.innerHTML = "0.0"
+							leftCodeTime.innerHTML = parseFloat((codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime))).toFixed(1) + "s";
+							leftPreparationTime.innerHTML = "0.0s"
 							if (codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime) < 5) {
 								codeDivTimer.style.backgroundColor = "#fe6d73";
 							}
@@ -140,7 +140,7 @@
 						if (timerPause == false) {
 							currentTimer += 0.1;
 						}
-						totalCodeTime.innerHTML = parseFloat((currentTimer)).toFixed(1)
+						totalCodeTime.innerHTML = parseFloat((currentTimer)) > 60 ? (parseFloat((currentTimer)) / 60).toFixed(0) + "m " + (parseFloat((currentTimer)) % 60).toFixed(1) + "s" : (parseFloat((currentTimer)) % 60).toFixed(1) + "s";
 					}, 100);
 				}
 			});
