@@ -71,7 +71,6 @@
 		var timerPause = false;
 		var start = 0;
 		var timerInterval = 0;
-		var soundStarted = false;
 		var prepaTime = document.getElementById("prepaTime").value;
 		var codeTime = document.getElementById("codeTime").value;
 		var prepaDivTimer = document.getElementById("prepaDivTimer");
@@ -109,12 +108,21 @@
 						leftPreparationTime.innerHTML = parseFloat(prepaTime - (currentTimer % (prepaTime + codeTime))).toFixed(1);
 						leftCodeTime.innerHTML = "0.0"
 						if (prepaTime - (currentTimer % (prepaTime + codeTime)) < 5)
-						prepaDivTimer.style.backgroundColor = "#fe6d73";
+						{
+
+							prepaDivTimer.style.backgroundColor = "#fe6d73";
+						}
 						else
 						{
-							soundStarted = false;
+							// soundStarted = false;
 							prepaDivTimer.style.backgroundColor = "#17c3b2";
 						}
+						if (prepaTime - (currentTimer % (prepaTime + codeTime)) > 0.45 && prepaTime - (currentTimer % (prepaTime + codeTime)) < 0.55)
+						{
+							var audio = new Audio('c_est_parti.mp3');
+							audio.play();
+						}
+
 						codeDivTimer.style.backgroundColor = "#ffcb77";
 					}
 					else
@@ -124,20 +132,45 @@
 						leftPreparationTime.innerHTML = "0.0"
 						if (codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime) < 5)
 						{
-							if (soundStarted == false)
-							{
-								var audio = new Audio('audio_file.mp3');
-								audio.play();
-							}
 							codeDivTimer.style.backgroundColor = "#fe6d73";
-							soundStarted = true;
 						}
 						else
 						{
-							soundStarted = false;
 							codeDivTimer.style.backgroundColor = "#17c3b2";
 						}
 						prepaDivTimer.style.backgroundColor = "#ffcb77";
+						if (codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime) > 4.95 && codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime) < 5.05)
+						{
+							var audio = new Audio('5.mp3');
+							audio.play();
+						}
+						if (codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime) > 3.95 && codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime) < 4.05)
+						{
+							var audio = new Audio('4.mp3');
+							audio.play();
+						}
+						if (codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime) > 2.95 && codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime) < 3.05)
+						{
+							var audio = new Audio('3.mp3');
+							audio.play();
+						}
+						if (codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime) > 1.95 && codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime) < 2.05)
+						{
+							var audio = new Audio('2.mp3');
+							audio.play();
+						}
+						if (codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime) > 0.95 && codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime) < 1.05)
+						{
+							var audio = new Audio('1.mp3');
+							audio.play();
+						}
+						if (codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime) > 0.05 && codeTime - (currentTimer % (prepaTime + codeTime) - prepaTime) < 0.15)
+						{
+							var audio = new Audio('on_change.mp3');
+							audio.play();
+						}
+
+
 					}
 					if (timerPause == false)
 					{
